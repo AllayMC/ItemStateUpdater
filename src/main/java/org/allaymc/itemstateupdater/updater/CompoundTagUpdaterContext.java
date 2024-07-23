@@ -59,27 +59,25 @@ public class CompoundTagUpdaterContext {
         return updater.builder();
     }
 
-    public NbtMap updateStates(NbtMap tag, int version) {
-        Map<String, Object> updated = this.updateStates0(tag, version);
+    public NbtMap updateStates(NbtMap tag, int updateToVersion) {
+        var updated = this.updateStates0(tag, updateToVersion);
         return updated == null ? tag : (NbtMap) TagUtils.toImmutable(updated);
     }
 
-    private Map<String, Object> updateStates0(NbtMap tag, int version) {
+    private Map<String, Object> updateStates0(NbtMap tag, int updateToVersion) {
         Map<String, Object> mutableTag = null;
         boolean updated = false;
         for (var updater : this.updaters) {
-            if (updater.getVersion() < version) continue;
+            if (updater.getVersion() > updateToVersion) continue;
 
             if (mutableTag == null) {
                 mutableTag = (Map<String, Object>) TagUtils.toMutable(tag);
             }
+
             updated |= updater.update(mutableTag);
         }
 
-        if (mutableTag == null || !updated) {
-            return null;
-        }
-        return mutableTag;
+        return mutableTag == null || !updated ? null : mutableTag;
     }
 
     private CompoundTagUpdater getLatestUpdater() {

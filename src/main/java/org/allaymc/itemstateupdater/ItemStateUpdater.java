@@ -18,14 +18,13 @@ public interface ItemStateUpdater {
         context.addUpdater(major, minor, patch)
                 .match("name", name)
                 .edit("meta", helper -> {
-                    var meta = (int) helper.getCompoundTag().get("meta");
+                    var meta = (int) helper.getTag();
                     var remap = Arrays.stream(remaps)
                             .filter(entry -> entry.meta() == meta)
                             .findFirst()
                             .orElseThrow(() -> new IllegalStateException("Unexpected remap meta '%d' for '%s'".formatted(meta, name)));
 
                     helper.replaceWith("name", remap.name());
-                    helper.replaceWith("meta", 0);
                 });
     }
 

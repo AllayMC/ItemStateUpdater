@@ -7,10 +7,11 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven("https://jitpack.io")
 }
 
 dependencies {
-    implementation("org.cloudburstmc:nbt:3.0.1.Final")
+    implementation("com.github.AllayMC:NBT:3.0.9")
 
     compileOnly("org.projectlombok:lombok:1.18.34")
     annotationProcessor("org.projectlombok:lombok:1.18.34")

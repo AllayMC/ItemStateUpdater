@@ -46,12 +46,12 @@ public class ItemStateUpdaters {
         LATEST_VERSION = context.getLatestVersion();
     }
 
-    public static ItemStateUpdater.Entry updateItemState(ItemStateUpdater.Entry entry, int version) {
-        var updatedState = updateItemState(entry.toNbt(), version);
+    public static ItemStateUpdater.Entry updateItemState(ItemStateUpdater.Entry entry, int updateToVersion) {
+        var updatedState = updateItemState(entry.toNbt(), updateToVersion);
         return ItemStateUpdater.Entry.fromNbt(updatedState);
     }
 
-    public static NbtMap updateItemState(NbtMap tag, int version) {
-        return CONTEXT.updateStates(tag, version);
+    public static NbtMap updateItemState(NbtMap tag, int updateToVersion) {
+        return CONTEXT.updateStates(tag, updateToVersion);
     }
 }
