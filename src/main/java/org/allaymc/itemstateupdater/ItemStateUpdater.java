@@ -1,7 +1,6 @@
 package org.allaymc.itemstateupdater;
 
 import org.allaymc.itemstateupdater.updater.CompoundTagUpdaterContext;
-import org.cloudburstmc.nbt.NbtMap;
 
 import java.util.Arrays;
 
@@ -16,36 +15,23 @@ public interface ItemStateUpdater {
 
     default void remapMeta(CompoundTagUpdaterContext context, int major, int minor, int patch, String name, RemapMetaEntry... remaps) {
         context.addUpdater(major, minor, patch)
-                .match("name", name)
-                .edit("meta", helper -> {
+                .match("Name", name)
+                .edit("Damage", helper -> {
                     var meta = (int) helper.getTag();
                     var remap = Arrays.stream(remaps)
                             .filter(entry -> entry.meta() == meta)
                             .findFirst()
                             .orElseThrow(() -> new IllegalStateException("Unexpected remap meta '%d' for '%s'".formatted(meta, name)));
 
-                    helper.replaceWith("name", remap.name());
+                    helper.replaceWith("Name", remap.name());
                 });
     }
 
     default void renameId(CompoundTagUpdaterContext context, int major, int minor, int patch, String oldName, String newName) {
         context.addUpdater(major, minor, patch)
-                .match("name", oldName)
-                .edit("name", helper -> helper.replaceWith("name", newName));
+                .match("Name", oldName)
+                .edit("Damage", helper -> helper.replaceWith("Name", newName));
     }
 
     record RemapMetaEntry(int meta, String name) {}
-
-    record Entry(String name, int meta) {
-        public static Entry fromNbt(NbtMap nbt) {
-            return new Entry(nbt.getString("name"), nbt.getInt("meta"));
-        }
-
-        public NbtMap toNbt() {
-            return NbtMap.builder()
-                    .putString("name", name)
-                    .putInt("meta", meta)
-                    .build();
-        }
-    }
 }

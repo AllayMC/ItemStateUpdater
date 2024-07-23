@@ -20,6 +20,7 @@ public class ItemStateUpdaters {
 
     static {
         List<ItemStateUpdater> updaters = new ArrayList<>();
+        updaters.add(ItemStateUpdaterBase.INSTANCE);
         updaters.add(ItemStateUpdater_1_12_0.INSTANCE);
         updaters.add(ItemStateUpdater_1_16_100.INSTANCE);
         updaters.add(ItemStateUpdater_1_16_200.INSTANCE);
@@ -44,11 +45,6 @@ public class ItemStateUpdaters {
         updaters.forEach(updater -> updater.registerUpdaters(context));
         CONTEXT = context;
         LATEST_VERSION = context.getLatestVersion();
-    }
-
-    public static ItemStateUpdater.Entry updateItemState(ItemStateUpdater.Entry entry, int updateToVersion) {
-        var updatedState = updateItemState(entry.toNbt(), updateToVersion);
-        return ItemStateUpdater.Entry.fromNbt(updatedState);
     }
 
     public static NbtMap updateItemState(NbtMap tag, int updateToVersion) {

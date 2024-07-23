@@ -11,6 +11,7 @@ repositories {
 }
 
 dependencies {
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
     implementation("com.github.AllayMC:NBT:3.0.9")
 
     compileOnly("org.projectlombok:lombok:1.18.34")
