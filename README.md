@@ -1,15 +1,19 @@
 ## Usage
 
 ```java
-ItemStateUpdater.Entry updatedEntry = ItemStateUpdaters.updateItemState(
-        new ItemStateUpdater.Entry("minecraft:coal", 1),
-        ItemStateUpdaters.LATEST_VERSION
-);
-// or
+// Update legacy items to new latest items (example for update jungle planks)
 NbtMap updatedNbt = ItemStateUpdaters.updateItemState(
         NbtMap.builder()
-                .putString("name", "minecraft:coal")
-                .putInt("meta", 1)
+                .putString("Id", "5")
+                .putInt("Damage", 3)
+                .build(),
+        ItemStateUpdaters.LATEST_VERSION
+);
+// or update new items to latest
+NbtMap updatedNbt = ItemStateUpdaters.updateItemState(
+        NbtMap.builder()
+                .putString("Name", "minecraft:coal")
+                .putInt("Damage", 1)
                 .build(),
         ItemStateUpdaters.LATEST_VERSION
 );
