@@ -1,5 +1,6 @@
 plugins {
     id("java-library")
+    id("maven-publish")
 }
 
 version = "1.21.0-SNAPSHOT"
@@ -21,6 +22,14 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
 
 tasks.test {
     useJUnitPlatform()
