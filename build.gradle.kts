@@ -2,8 +2,9 @@ plugins {
     id("java")
 }
 
-group = "org.allaymc.itemstateupdater"
-version = "1.0.0"
+version = "1.21.0-SNAPSHOT"
+group = "org.allaymc"
+description = "Updates Minecraft: Bedrock Edition item states to the latest revision"
 
 repositories {
     mavenCentral()

@@ -1,2 +1,2 @@
-rootProject.name = "ItemStateUpdater"
+rootProject.name = "item-state-updater"
 
