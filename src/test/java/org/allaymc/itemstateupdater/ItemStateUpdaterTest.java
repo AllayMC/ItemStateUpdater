@@ -67,4 +67,16 @@ class ItemStateUpdaterTest {
 
         assertEquals(result.getString("Name"), "minecraft:music_disc_creator");
     }
+
+    @Test
+    void rename_id_for_grass() {
+        var result = ItemStateUpdaters.updateItemState(
+                NbtMap.builder()
+                        .putString("Name", "minecraft:grass")
+                        .build(),
+                ItemStateUpdaters.LATEST_VERSION
+        );
+
+        assertEquals(result.getString("Name"), "minecraft:grass_block");
+    }
 }

@@ -30,7 +30,7 @@ public interface ItemStateUpdater {
     default void renameId(CompoundTagUpdaterContext context, int major, int minor, int patch, String oldName, String newName) {
         context.addUpdater(major, minor, patch)
                 .match("Name", oldName)
-                .edit("Damage", helper -> helper.replaceWith("Name", newName));
+                .edit("Name", helper -> helper.replaceWith("Name", newName));
     }
 
     record RemapMetaEntry(int meta, String name) {}
