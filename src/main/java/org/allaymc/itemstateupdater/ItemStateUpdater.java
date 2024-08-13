@@ -17,7 +17,7 @@ public interface ItemStateUpdater {
         context.addUpdater(major, minor, patch)
                 .match("Name", name)
                 .edit("Damage", helper -> {
-                    var meta = (int) helper.getTag();
+                    var meta = Integer.parseInt(helper.getTag().toString());
                     var remap = Arrays.stream(remaps)
                             .filter(entry -> entry.meta() == meta)
                             .findFirst()
