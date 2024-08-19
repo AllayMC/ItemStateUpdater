@@ -40,6 +40,7 @@ public class ItemStateUpdaters {
         updaters.add(ItemStateUpdater_1_20_70.INSTANCE);
         updaters.add(ItemStateUpdater_1_20_80.INSTANCE);
         updaters.add(ItemStateUpdater_1_21_0.INSTANCE);
+        updaters.add(ItemStateUpdater_1_21_20.INSTANCE);
 
         var context = new CompoundTagUpdaterContext();
         updaters.forEach(updater -> updater.registerUpdaters(context));
